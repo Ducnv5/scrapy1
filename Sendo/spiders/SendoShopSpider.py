@@ -69,7 +69,8 @@ class SendoShopSpider(scrapy.Spider):
             for shop_info in shop_infos:
                 if property_dict[field] in shop_info.lower():
                     try:
-                        property_value = re.search("<span>(.*)</span>", shop_info).group(1)
+                        shop_info_ = shop_info.replace("\t", "").replace("\n", "")
+                        property_value = re.search("<span>(.*)</span>", shop_info_).group(1)
                         item[field] += property_value
                         break
                     except Exception as e:
